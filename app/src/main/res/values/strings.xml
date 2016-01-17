@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">T03MyNews</string>
+    <string name="sn_tv">看新闻</string>
+    <string name="sn_news">刷新一下</string>
+</resources>
