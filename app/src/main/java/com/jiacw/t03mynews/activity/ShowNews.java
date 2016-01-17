@@ -48,6 +48,7 @@ public class ShowNews extends Activity implements View.OnClickListener,AdapterVi
         mLV.setOnItemClickListener(this);
         if (!isUpdated){
             requestNews();
+            isUpdated=true;
         }
     }
 
@@ -60,7 +61,7 @@ public class ShowNews extends Activity implements View.OnClickListener,AdapterVi
     }
     private void requestNews(){
         try {
-            URL url = new URL("http://api.1-blog.com/biz/bizserver/news/list.do?size=5");
+            URL url = new URL("http://api.1-blog.com/biz/bizserver/news/list.do");
             HttpUtil.requestNews(url, new HttpCallbackListener() {
                 @Override
                 public void onFinish(String response) {
@@ -107,8 +108,8 @@ public class ShowNews extends Activity implements View.OnClickListener,AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent =new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(mNewsList.get(position).getArticle_url()));
+        Intent intent =new Intent(this,ShowNewsContent.class);
+        intent.putExtra("url",mNewsList.get(position).getArticle_url());
         startActivity(intent);
     }
 }
