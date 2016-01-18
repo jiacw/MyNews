@@ -47,7 +47,7 @@ public class NewsDB {
     }
 
     public List<News> queryNews() {
-        mCursor = mSQLite.query("News", null, null, null, null, null, null);
+        mCursor = mSQLite.query("News", null, null, null, null, null, "data desc");
         List<News> list = new ArrayList<>();
         if (mCursor.moveToFirst()) {
             do {

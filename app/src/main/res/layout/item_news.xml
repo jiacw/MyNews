@@ -8,7 +8,9 @@
         android:id="@+id/in_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="测试"
+        android:text="@string/in_title"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:textSize="20sp"/>
 
     <LinearLayout
@@ -19,14 +21,14 @@
             android:id="@+id/in_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="来源"/>
+            android:text="@string/in_source"/>
 
         <TextView
             android:id="@+id/in_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="时间"/>
+            android:text="@string/in_time"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,29 +38,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="赞"/>
+            android:layout_gravity="center_vertical"
+            android:text="@string/in_digg_text"/>
 
         <TextView
             android:id="@+id/in_digg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/in_test_num"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="2dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:gravity="center_vertical"
-            android:text="|"/>
+            android:text="@string/in_separator"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="踩"/>
+            android:layout_gravity="center_vertical"
+            android:text="@string/in_bury_text"/>
 
         <TextView
             android:id="@+id/in_bury"
             android:layout_width="wrap_content"
+            android:text="@string/in_test_num"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             />
@@ -67,17 +74,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:text="|"
+            android:text="@string/in_separator"
             />
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:text="收藏"/>
+            android:text="@string/in_repin_text"/>
 
         <TextView
             android:id="@+id/in_repin"
             android:layout_width="wrap_content"
+            android:text="@string/in_test_num"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             />

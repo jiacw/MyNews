@@ -2,4 +2,12 @@
     <string name="app_name">T03MyNews</string>
     <string name="sn_tv">看新闻</string>
     <string name="sn_news">刷新一下</string>
+    <string name="in_title">标题</string>
+    <string name="in_source">来源</string>
+    <string name="in_time">时间</string>
+    <string name="in_digg_text">赞</string>
+    <string name="in_test_num">00</string>
+    <string name="in_separator">|</string>
+    <string name="in_bury_text">踩</string>
+    <string name="in_repin_text">收藏</string>
 </resources>
