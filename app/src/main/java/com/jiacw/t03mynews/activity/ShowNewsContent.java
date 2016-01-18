@@ -47,7 +47,10 @@ public class ShowNewsContent extends Activity{
                 }
             }
         });
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setDisplayZoomControls(false);
         mWebView.getSettings().setLoadWithOverviewMode(true);
+        mWebView.getSettings().setBuiltInZoomControls(true);
         String uri=getIntent().getStringExtra("url");
         mWebView.loadUrl(uri);
     }

@@ -85,7 +85,7 @@ public class ShowNewsList extends Activity implements View.OnClickListener,Adapt
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ShowNewsList.this, "网络请求出错>_<", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ShowNewsList.this, "网络请求出错>_<", Toast.LENGTH_LONG).show();
                         }
                     });
 
