@@ -1,4 +1,4 @@
-package com.jiacw.t03mynews.util;
+package com.jiacw.t03mynews.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

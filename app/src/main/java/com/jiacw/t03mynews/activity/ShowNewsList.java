@@ -17,7 +17,7 @@ import com.jiacw.t03mynews.model.NewsDB;
 import com.jiacw.t03mynews.util.HttpCallbackListener;
 import com.jiacw.t03mynews.util.HttpUtil;
 import com.jiacw.t03mynews.util.JsonUtil;
-import com.jiacw.t03mynews.util.MyAdapter;
+import com.jiacw.t03mynews.adapter.MyAdapter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
