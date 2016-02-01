@@ -22,10 +22,14 @@ public class NewsDB {
     private Cursor mCursor;
 
     private NewsDB(Context context) {
-        NewsOH newsOH = new NewsOH(context, NEWDB, null, 1);
+        NewsOH newsOH = new NewsOH(context, NEWDB);
         mSQLite = newsOH.getWritableDatabase();
     }
 
+    /**
+     * created at 20/1/2016 16:12
+     * function: 获取NewsDB实例
+     */
     public synchronized static NewsDB getInstance(Context context) {
         if (mNewsDB == null) {
             mNewsDB = new NewsDB(context);
@@ -33,6 +37,10 @@ public class NewsDB {
         return mNewsDB;
     }
 
+    /**
+     * created at 20/1/2016 16:13
+     * function: 保存新闻到数据库
+     */
     public void saveNews(String title, String source, String article_url, String data
             , int digg_count, int bury_count, int repin_count) {
         ContentValues value = new ContentValues();
@@ -46,8 +54,14 @@ public class NewsDB {
         mSQLite.insert("News", null, value);
     }
 
+    /**
+     * created at 20/1/2016 16:13
+     * function: 查询新闻添加到新闻列表中
+     */
     public List<News> queryNews() {
-        mCursor = mSQLite.query("News", null, null, null, null, null, "data desc");
+        if (mCursor == null) {
+            mCursor = mSQLite.query("News", null, null, null, null, null, "data desc");
+        }
         List<News> list = new ArrayList<>();
         if (mCursor.moveToFirst()) {
             do {

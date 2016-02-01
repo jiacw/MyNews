@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * Created by Jiacw on 21:53 11/1/2016.
  * Email: 313133710@qq.com
- * Function:适配器
+ * Function:新闻列表适配器
  */
-public class MyAdapter extends BaseAdapter{
-    private List<News> mNewsList;
-    private Context mContext;
+public class MyAdapter extends BaseAdapter {
+    private final List<News> mNewsList;
+    private final Context mContext;
 
     public MyAdapter(Context context, List<News> newsList) {
         mContext = context;
@@ -28,7 +28,7 @@ public class MyAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return mNewsList.size();
+        return mNewsList != null ? mNewsList.size() : 0;
     }
 
     @Override
@@ -46,9 +46,8 @@ public class MyAdapter extends BaseAdapter{
         View view;
         ViewHolder viewHolder;
         News news = mNewsList.get(position);
-
         if (convertView == null) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_news, parent, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.news_item, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.mTVTitle = (TextView) view.findViewById(R.id.in_title);
             viewHolder.mTVSource = (TextView) view.findViewById(R.id.in_source);
@@ -77,5 +76,9 @@ public class MyAdapter extends BaseAdapter{
         public TextView mTVDigg;
         public TextView mTVBury;
         public TextView mTVRepin;
+    }
+
+    public void addMoreNews(List<News> newsList) {
+        mNewsList.addAll(newsList);
     }
 }

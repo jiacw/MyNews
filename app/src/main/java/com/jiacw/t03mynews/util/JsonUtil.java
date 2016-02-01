@@ -1,17 +1,11 @@
 package com.jiacw.t03mynews.util;
 
-import android.content.Intent;
-import android.provider.ContactsContract;
-import android.text.format.Time;
-import android.util.Log;
-
 import com.jiacw.t03mynews.model.NewsDB;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 
 /**
@@ -20,8 +14,10 @@ import java.text.SimpleDateFormat;
  * Function:解析返回的json数据
  */
 public class JsonUtil {
-
-
+    /**
+    * created at 20/1/2016 16:10
+    * function: 解析json数据
+    */
     public static boolean handleJsonData(NewsDB newsDb, String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);

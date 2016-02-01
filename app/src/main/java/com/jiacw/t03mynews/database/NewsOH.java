@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Jiacw on 19:20 11/1/2016.
  * Email: 313133710@qq.com
- * Function:
+ * Function:新闻数据库
  */
 public class NewsOH extends SQLiteOpenHelper {
-    public static final String SQL="create table News(" +
+    private static final String SQL="create table News(" +
             "id integer primary key autoincrement," +
             "title text," +
             "source text," +
@@ -19,8 +19,8 @@ public class NewsOH extends SQLiteOpenHelper {
             "digg_count integer," +
             "bury_count integer," +
             "repin_count integer)";
-    public NewsOH(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public NewsOH(Context context, String name) {
+        super(context, name, null, 1);
     }
 
     @Override

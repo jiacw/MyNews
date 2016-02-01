@@ -1,13 +1,14 @@
 package com.jiacw.t03mynews.activity;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -19,23 +20,25 @@ import com.jiacw.t03mynews.R;
  * Email: 313133710@qq.com
  * Function:显示新闻内容
  */
-public class ShowNewsContent extends Activity{
-    private WebView mWebView;
-    final Activity activity=this;
+public class ShowNewsContent extends Activity {
+    private final Activity activity = this;
+    private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
-        setContentView(R.layout.content_news);
-        mWebView= (WebView) findViewById(R.id.cn_wv);
-        mWebView.getSettings().setJavaScriptEnabled(true);//支持js脚本
-        mWebView.setWebChromeClient(new WebChromeClient() {
+        setContentView(R.layout.news_content);
+        webView = (WebView) findViewById(R.id.cn_wv);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);//支持js脚本
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 activity.setProgress(newProgress * 100);
             }
         });
-        mWebView.setWebViewClient(new WebViewClient() {
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request
                     , WebResourceError error) {
@@ -47,11 +50,20 @@ public class ShowNewsContent extends Activity{
                 }
             }
         });
-        mWebView.getSettings().setUseWideViewPort(true);
-        mWebView.getSettings().setDisplayZoomControls(false);
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setBuiltInZoomControls(true);
-        String uri=getIntent().getStringExtra("url");
-        mWebView.loadUrl(uri);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setBuiltInZoomControls(true);
+        String uri = getIntent().getStringExtra("url");
+        webView.loadUrl(uri);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

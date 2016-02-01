@@ -7,6 +7,14 @@ package com.jiacw.t03mynews.util;
  */
 //2.建立接口
 public interface HttpCallbackListener {
-    public void onFinish(String response);
-    public void onError(Exception e);
+    /**
+    * created at 20/1/2016 16:09
+    * function: 成功获取json字符串
+    */
+    void onFinish(String response);
+    /**
+    * created at 20/1/2016 16:09
+    * function: 网络请求失败
+    */
+    void onError();
 }

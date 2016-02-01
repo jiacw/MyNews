@@ -3,7 +3,7 @@ package com.jiacw.t03mynews.model;
 /**
  * Created by Jiacw on 19:39 11/1/2016.
  * Email: 313133710@qq.com
- * Function:
+ * Function:新闻类
  */
 public class News {
     private String title;
