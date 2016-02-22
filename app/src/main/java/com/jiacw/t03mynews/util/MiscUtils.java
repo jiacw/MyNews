@@ -3,7 +3,7 @@ package com.jiacw.t03mynews.util;
 import android.os.Environment;
 import android.os.StatFs;
 
-import com.jiacw.t03mynews.cache.ImageDownloader;
+import com.jiacw.t03mynews.cache.ImgDownloadCache;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class MiscUtils {
         int freeSize = 0;
         if (hasStorage()) {
             //获取文件系统统计信息
-            StatFs statFs = new StatFs(ImageDownloader.APP_FOLDER_ON_SD);
+            StatFs statFs = new StatFs(ImgDownloadCache.APP_FOLDER_ON_SD);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 long blockSize = statFs.getBlockSizeLong();
                 long availableBlock=statFs.getAvailableBlocksLong();
@@ -50,13 +50,13 @@ public class MiscUtils {
      * @return true-目录可写;false-不是目录、不能创建文件
      */
     private static boolean checkFsWritable() {
-        File directory = new File(ImageDownloader.APP_FOLDER_ON_SD);
+        File directory = new File(ImgDownloadCache.APP_FOLDER_ON_SD);
         if (!directory.isDirectory()) {
             if (!directory.mkdirs()) {
                 return false;
             }
         }
-        File file = new File(ImageDownloader.APP_FOLDER_ON_SD, ".probe");
+        File file = new File(ImgDownloadCache.APP_FOLDER_ON_SD, ".probe");
         if (file.exists()) {
             file.delete();
         }

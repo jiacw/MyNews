@@ -20,7 +20,7 @@ import com.jiacw.t03mynews.R;
  * Email: 313133710@qq.com
  * Function:显示新闻内容
  */
-public class ShowNewsContent extends Activity {
+public class NewsWeb extends Activity {
     private final Activity activity = this;
     private WebView webView;
 
@@ -43,10 +43,10 @@ public class ShowNewsContent extends Activity {
             public void onReceivedError(WebView view, WebResourceRequest request
                     , WebResourceError error) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    Toast.makeText(ShowNewsContent.this, "出错啦\n"
+                    Toast.makeText(NewsWeb.this, "出错啦\n"
                             + error.getDescription().toString(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(ShowNewsContent.this, "出错啦 >_<", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewsWeb.this, "出错啦 >_<", Toast.LENGTH_SHORT).show();
                 }
             }
         });

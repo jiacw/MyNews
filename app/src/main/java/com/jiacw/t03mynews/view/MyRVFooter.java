@@ -15,7 +15,7 @@ import com.jiacw.t03mynews.R;
  * Email: 313133710@qq.com
  * Function:列表尾部视图
  */
-public class SListViewFooter extends LinearLayout {
+public class MyRVFooter extends LinearLayout {
     public static final int STATE_NORMAL = 0;
     public static final int STATE_READY = 1;
     public static final int STATE_LOADING = 2;
@@ -23,12 +23,12 @@ public class SListViewFooter extends LinearLayout {
     private ProgressBar mProgressBar;
     private TextView mTVHint;
 
-    public SListViewFooter(Context context) {
+    public MyRVFooter(Context context) {
         super(context);
         initView(context);
     }
 
-    public SListViewFooter(Context context, AttributeSet attrs) {
+    public MyRVFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -57,53 +57,57 @@ public class SListViewFooter extends LinearLayout {
         lp.height = 0;
         mRLContentView.setLayoutParams(lp);
     }
+
     /**
-    * created at 21/1/2016 15:34
-    * function: 使内容可见
-    */
+     * created at 21/1/2016 15:34
+     * function: 使内容可见
+     */
     public void show() {
         LinearLayout.LayoutParams lp = (LayoutParams) mRLContentView.getLayoutParams();
-        lp.height= LayoutParams.WRAP_CONTENT;
+        lp.height = LayoutParams.WRAP_CONTENT;
         mRLContentView.setLayoutParams(lp);
     }
+
     /**
-    * created at 21/1/2016 15:39
-    * function: 设置尾部显示状态
-    */
+     * created at 21/1/2016 15:39
+     * function: 设置尾部显示状态
+     */
     public void setState(int state) {
         //初始化都不可见
         mTVHint.setVisibility(INVISIBLE);
         mProgressBar.setVisibility(INVISIBLE);
-        if (state==STATE_READY){//拉动状态
+        if (state == STATE_READY) {//拉动状态
             mTVHint.setVisibility(VISIBLE);
             mTVHint.setText(R.string.footer_ready);
-        }else if (state==STATE_LOADING){
+        } else if (state == STATE_LOADING) {
             mProgressBar.setVisibility(VISIBLE);
-        }else {
+        } else {
             mTVHint.setVisibility(VISIBLE);
             mTVHint.setText(R.string.lf_tvHint);
         }
     }
 
     /**
-     *设置尾部间距
+     * 设置尾部间距
+     *
      * @param height 高度
      */
     public void setBottomMargin(int height) {
-        if (height<0){
-            return ;
+        if (height < 0) {
+            return;
         }
-        LinearLayout.LayoutParams lp= (LayoutParams) mRLContentView.getLayoutParams();
-        lp.bottomMargin=height;
+        LinearLayout.LayoutParams lp = (LayoutParams) mRLContentView.getLayoutParams();
+        lp.bottomMargin = height;
         mRLContentView.setLayoutParams(lp);
     }
 
     /**
      * 获取尾部间距
+     *
      * @return The bottom margin in pixels of the child
      */
     public int getBottomMargin() {
-        LinearLayout.LayoutParams lp= (LayoutParams) mRLContentView.getLayoutParams();
+        LinearLayout.LayoutParams lp = (LayoutParams) mRLContentView.getLayoutParams();
         return lp.bottomMargin;
     }
 }

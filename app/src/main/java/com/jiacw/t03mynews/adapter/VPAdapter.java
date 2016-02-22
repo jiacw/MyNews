@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jiacw.t03mynews.R;
-import com.jiacw.t03mynews.cache.ImageDownloader;
+import com.jiacw.t03mynews.cache.ImgDownloadCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Email: 313133710@qq.com
  * Function:适配顶部图片
  */
-public class TopViewPageAdapter extends PagerAdapter {
+public class VPAdapter extends PagerAdapter {
     private final List<String> mImageList;
     private final List<View> mViewPageList;
     private final Context mContext;
@@ -29,7 +29,7 @@ public class TopViewPageAdapter extends PagerAdapter {
      * @param context 上下文
      * @param imageList 图片地址
      */
-    public TopViewPageAdapter(Context context, List<String> imageList) {
+    public VPAdapter(Context context, List<String> imageList) {
         mContext = context;
         mImageList = imageList;
         mViewPageList = new ArrayList<>();
@@ -58,7 +58,7 @@ public class TopViewPageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(mViewPageList.get(position));
         final ImageView imageView= (ImageView) mViewPageList.get(position).findViewById(R.id.nv_iv);
-        ImageDownloader imageDownloader = new ImageDownloader(mContext);
+        ImgDownloadCache imageDownloader = new ImgDownloadCache(mContext);
         imageDownloader.download(mImageList.get(position), imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

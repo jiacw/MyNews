@@ -17,7 +17,7 @@ import com.jiacw.t03mynews.R;
  * Email: 313133710@qq.com
  * Function:自定义头视图
  */
-public class SListViewHeader extends LinearLayout {
+public class MyRVHeader extends LinearLayout {
     private static final int ROTATE_ANIM_DURATION = 180;
     public static final int STATE_NORMAL = 0;
     public static final int STATE_REFESHING = 2;
@@ -32,12 +32,12 @@ public class SListViewHeader extends LinearLayout {
     private int mLastState = STATE_NORMAL;
 
     //构造方法
-    public SListViewHeader(Context context) {
+    public MyRVHeader(Context context) {
         super(context);
         initView(context);
     }
 
-    public SListViewHeader(Context context, AttributeSet attrs) {
+    public MyRVHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }

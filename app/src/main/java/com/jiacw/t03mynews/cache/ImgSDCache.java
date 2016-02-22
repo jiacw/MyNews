@@ -17,21 +17,21 @@ import java.util.Comparator;
  * Email: 313133710@qq.com
  * Function:图片SD卡缓存
  */
-public class ImageSDCache {
+public class ImgSDCache {
     private static final int FREE_SD_SPACE_NEEDED_TO_CACHE = 50;//mb
     private static final String JPG = ".jpg";
     private static final int MAX_CACHE_SIZE_NEEDED = 30;//mb
     private String filePic;
     private final BitmapUtil mBitmapUtil = new BitmapUtil();
-    private static ImageSDCache imageSDCache;
+    private static ImgSDCache imageSDCache;
 
     /**
      * 获取ImageSDCache实例
      * @return 实例
      */
-    public static ImageSDCache getImageSDCache() {
+    public static ImgSDCache getImageSDCache() {
         if (imageSDCache==null){
-            imageSDCache=new ImageSDCache();
+            imageSDCache=new ImgSDCache();
         }
         return imageSDCache;
     }

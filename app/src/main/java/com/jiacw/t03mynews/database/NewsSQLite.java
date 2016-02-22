@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Email: 313133710@qq.com
  * Function:新闻数据库
  */
-public class NewsOH extends SQLiteOpenHelper {
+public class NewsSQLite extends SQLiteOpenHelper {
     private static final String SQL="create table News(" +
             "id integer primary key autoincrement," +
             "title text," +
@@ -19,7 +19,8 @@ public class NewsOH extends SQLiteOpenHelper {
             "digg_count integer," +
             "bury_count integer," +
             "repin_count integer)";
-    public NewsOH(Context context, String name) {
+
+    public NewsSQLite(Context context, String name) {
         super(context, name, null, 1);
     }
 

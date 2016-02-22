@@ -32,12 +32,12 @@ import java.util.LinkedHashMap;
  * Function:从网络下载图片，和ImageView绑定的帮助类；
  * 本地缓存，保持在内部用来提高表现
  */
-public class ImageDownloader {
+public class ImgDownloadCache {
     private static final int DELAY_BEFORE_PURGE = 30 * 1000;//30秒清空一次缓存
     private static final String DEFAULT_BITMAP_CACHE = "default_bitmap_cache";
     private final ScreenUtil.Screen mScreen;
     private final Context mContext;
-    private final ImageSDCache mImageSDCache;
+    private final ImgSDCache mImageSDCache;
     private ImageView.ScaleType mScaleType;
     private final Handler purgeHandler = new Handler();
     private static final int HARD_CACHE_CAPACITY = 2;//缓存中Bitmap强引用的个数
@@ -50,8 +50,8 @@ public class ImageDownloader {
      * created at 22/1/2016 10:46
      * function: 实例化ImageSDCache类，获取Screen对象
      */
-    public ImageDownloader(Context context) {
-        mImageSDCache = ImageSDCache.getImageSDCache();
+    public ImgDownloadCache(Context context) {
+        mImageSDCache = ImgSDCache.getImageSDCache();
         mContext = context;
         mScreen = ScreenUtil.getScreenPixel(context);
     }

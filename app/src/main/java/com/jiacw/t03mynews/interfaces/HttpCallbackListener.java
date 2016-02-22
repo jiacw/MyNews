@@ -1,4 +1,4 @@
-package com.jiacw.t03mynews.util;
+package com.jiacw.t03mynews.interfaces;
 
 /**
  * Created by Jiacw on 16:27 11/1/2016.

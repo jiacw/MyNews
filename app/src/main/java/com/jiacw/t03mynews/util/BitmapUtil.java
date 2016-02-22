@@ -2,18 +2,14 @@ package com.jiacw.t03mynews.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.LruCache;
 
-import com.jiacw.t03mynews.cache.ImageSDCache;
+import com.jiacw.t03mynews.cache.ImgSDCache;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.Set;
 
 /**
  * Created by Jiacw on 15:36 22/1/2016.
@@ -104,7 +100,7 @@ public class BitmapUtil {
             bitmap = BitmapFactory.decodeStream(saveBAIS, null, null);
         }
         //保存到SDCard
-        ImageSDCache.getImageSDCache().saveBitmapToSDCard(bitmap, url, cachePath, isJpg, quality);
+        ImgSDCache.getImageSDCache().saveBitmapToSDCard(bitmap, url, cachePath, isJpg, quality);
         return bitmap;
     }
 

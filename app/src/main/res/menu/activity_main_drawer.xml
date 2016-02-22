@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_test"
+            android:icon="@drawable/ic_favorite_black_18dp"
+            android:title="@string/nav_favourite"/>
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/action_setting"/>
+    </group>
+    <item android:title="@string/item_below">
+        <menu>
+            <item android:id="@+id/nav_feedback"
+                  android:icon="@drawable/ic_menu_send"
+                  android:title="@string/nav_feedback"/>
+            <item android:id="@+id/nav_about"
+                  android:icon="@drawable/ic_mood_black_24dp"
+                  android:title="@string/nav_about"/>
+        </menu>
+    </item>
+</menu>

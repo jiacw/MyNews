@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.jiacw.t03mynews.database.NewsOH;
+import com.jiacw.t03mynews.database.NewsSQLite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class NewsDB {
     private Cursor mCursor;
 
     private NewsDB(Context context) {
-        NewsOH newsOH = new NewsOH(context, NEWDB);
+        NewsSQLite newsOH = new NewsSQLite(context, NEWDB);
         mSQLite = newsOH.getWritableDatabase();
     }
 

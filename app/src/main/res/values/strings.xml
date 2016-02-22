@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">T03MyNews</string>
+    <string name="app_name">我的新闻</string>
     <string name="sn_tv">看新闻</string>
     <string name="sn_news">刷新一下</string>
     <string name="in_title">标题</string>
@@ -15,5 +15,16 @@
     <string name="lf_tvHint">查看更多</string>
     <string name="footer_ready">松开载入更多</string>
     <string name="lh_tvHint_ready">松开刷新数据</string>
-    <string name="lh_tvHint_loading">正在加载...</string>
+    <string name="lh_tvHint_loading">正在加载…</string>
+    <string name="author">Jiacw</string>
+    <string name="email">313133710@qq.com</string>
+    <string name="nav_drawer_open">open drawer</string>
+    <string name="nav_drawer_close">drawer close</string>
+    <string name="action_search">搜索</string>
+    <string name="action_setting">设置</string>
+    <string name="item_below">Communicate</string>
+    <string name="nav_about">关于</string>
+    <string name="nav_feedback">反馈</string>
+    <string name="nav_favourite">收藏</string>
+    <string name="action_share">分享</string>
 </resources>
