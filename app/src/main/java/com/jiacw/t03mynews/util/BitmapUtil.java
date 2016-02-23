@@ -2,8 +2,6 @@ package com.jiacw.t03mynews.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.LruCache;
 
 import com.jiacw.t03mynews.cache.ImageSDCache;
 
@@ -12,8 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.Set;
 
 /**
  * Created by Jiacw on 15:36 22/1/2016.
