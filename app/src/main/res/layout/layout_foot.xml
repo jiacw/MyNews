@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
 
-    <RelativeLayout
-        android:id="@+id/lf_rl_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center_horizontal"
+                  android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/lf_pb"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/lf_rl_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="invisible"/>
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/lf_tvHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/lf_tvHint"/>
-    </RelativeLayout>
-</LinearLayout>
+            <ProgressBar
+                android:id="@+id/lf_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/lf_tvHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/lf_tvHint"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

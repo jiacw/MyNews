@@ -5,11 +5,12 @@ import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
@@ -30,10 +31,11 @@ import java.util.ArrayList;
  * Function:自定义ListView
  */
 
-public class MyRecyclerView extends RecyclerView implements AbsListView.OnScrollListener {
+public class MyRecyclerView extends RecyclerView {
+
     //成员变量
     private OnScrollListener mScrollListener;//滚动监听
-
+    private ViewParent mViewParent;
     //接口用来引发刷新和加载更多
     private IXListViewListener mListViewListener;
     //头部视图
@@ -57,13 +59,12 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
     private static final int SCROLL_DURATION = 400;
     private static final int PULL_LOAD_MORE_DELTA = 50;//当拉动超过50像素，引起更多
     private static final float OFFSET_RADIO = 1.8f;
-    private int mfirstVisibleItem;
 
     //适配器
     Adapter mAdapter;//实例对象
     //添加View
-    ArrayList<View> mHeadViewInfos = new ArrayList<>();
-    ArrayList<View> mFootViewInfos = new ArrayList<>();
+    public ArrayList<View> mHeadViewInfos = new ArrayList<>();
+    public ArrayList<View> mFootViewInfos = new ArrayList<>();
 
     //接口
     OnRVItemClickListener mOnRVItemClickListener;
@@ -95,7 +96,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
         mHeaderTime = (TextView) mHeaderView.findViewById(R.id.lh_tvUpdateTime);
         //添加头部视图
         addHeaderView(mHeaderView);
-        LogUtil.d("jiacw", "addView HeadView " + mHeadViewInfos.size());
         //初始化尾部视图
         mFooterView = new MyRVFooter(context);
         //获取头部试图的高度
@@ -116,7 +116,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
     public void addHeaderView(View v) {
         mHeadViewInfos.add(v);
         mHeadViewSize++;
-        LogUtil.d("jiacw", "addHeader HeadView " + mHeadViewInfos.size());
         if (mAdapter != null) {
             if (!(mAdapter instanceof RVAdapter)) {
                 mAdapter = new RVAdapter(mHeadViewInfos, mFootViewInfos, mAdapter);
@@ -126,7 +125,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
     }
 
     public void addFooterView(View view) {
-        LogUtil.d("jiacw", "addFooter HeadView " + mHeadViewInfos.size());
 
         mFootViewInfos.clear();
         mFootViewInfos.add(view);
@@ -134,8 +132,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
             mAdapter = new RVAdapter(mHeadViewInfos, mFootViewInfos, mAdapter);
             mAdapter.notifyDataSetChanged();
         }
-        LogUtil.d("jiacw", "addFooter HeadView " + mHeadViewInfos.size());
-
     }
 
     /**
@@ -144,7 +140,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * @param enable 可用或不可用
      */
     public void setPullLoadEnabled(boolean enable) {
-        LogUtil.d("jiacw", "setPullLoad HeadView " + mHeadViewInfos.size());
         mEnablePullLoad = enable;
         //如果不可拉动加载
         if (!mEnablePullLoad) {
@@ -168,7 +163,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * 设置正在拉动状态；设置状态-加载中；监听加载更多事件
      */
     private void startLoadMore() {
-        LogUtil.d("jiacw", "startLoad HeadView " + mHeadViewInfos.size());
         mPullLoading = true;
         mFooterView.setState(MyRVFooter.STATE_LOADING);
         if (mListViewListener != null) {
@@ -189,7 +183,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * stop refresh, reset header view.
      */
     public void stopRefresh() {
-        LogUtil.d("jiacw", "stopRefresh HeadView " + mHeadViewInfos.size());
         if (mPullRefreshing) {
             mPullRefreshing = false;
             resetHeaderHeight();
@@ -200,7 +193,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * reset header view's height.
      */
     private void resetHeaderHeight() {
-        LogUtil.d("jiacw", "resetHeader HeadView " + mHeadViewInfos.size());
         int height = mHeaderView.getVisibleHeight();
         if (height == 0) {
             return;
@@ -224,7 +216,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * stop load more, reset footer view.
      */
     public void stopLoadMore() {
-        LogUtil.d("jiacw", "stopLoad HeadView " + mHeadViewInfos.size());
         if (mPullLoading) {
             mPullLoading = false;
             mFooterView.setState(MyRVFooter.STATE_NORMAL);
@@ -235,7 +226,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * 设置刷新时间
      */
     public void setRefreshTime() {
-        LogUtil.d("jiacw", "setRefresh HeadView " + mHeadViewInfos.size());
         mHeaderTime.setText("刚刚");
     }
 
@@ -243,7 +233,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * 重置尾部高度
      */
     private void resetFooterHeight() {
-        LogUtil.d("jiacw", "resetFooter HeadView " + mHeadViewInfos.size());
         int bottomMargin = mFooterView.getBottomMargin();
         if (bottomMargin > 0) {
             mScrollBack = SCROLLBACK_FOOTER;
@@ -254,19 +243,19 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
 
     private int getFirstVisiblePosition() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
-        return layoutManager.findFirstVisibleItemPosition();
+        RecyclerView.LayoutManager manager = getLayoutManager();
+        LogUtil.d("jiacw3", "getFirst " + manager.getChildCount());
+        return layoutManager.findFirstVisibleItemPosition() - 1;
     }
 
     private int getLastVisiblePosition() {
-        LogUtil.d("jiacw", "getLastVis HeadView " + mHeadViewInfos.size());
         LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
-        return layoutManager.findLastVisibleItemPosition();
+        return layoutManager.findLastVisibleItemPosition() - 1;
     }
 
     private int getTotalItemCount() {
-        LogUtil.d("jiacw", "gettotal HeadView " + mHeadViewInfos.size());
         RecyclerView.LayoutManager manager = getLayoutManager();
-        return manager.getItemCount() - mHeadViewSize - mFootViewInfos.size();
+        return manager.getItemCount() - mHeadViewSize;
     }
 
     /**
@@ -275,7 +264,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * @param delta 滑动值
      */
     private void updateFooterHeight(float delta) {
-//        LogUtil.d("jiacw", "updateFooter HeadView " + mHeadViewInfos.size());
         int height = mFooterView.getBottomMargin() + (int) delta;
         if (mEnablePullLoad && !mPullLoading) {
             //高度足够载入
@@ -295,7 +283,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
      * @param delta 滑动值
      */
     private void updateHeaderHeight(float delta) {
-//        LogUtil.d("jiacw", "updateHead HeadView " + mHeadViewInfos.size());
         mHeaderView.setVisibleHeight((int) (delta + mHeaderView.getVisibleHeight()));
         if (!mPullRefreshing) {
             if (mHeaderView.getVisibleHeight() > mHeaderViewHeight) {
@@ -304,9 +291,7 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
                 mHeaderView.setLastState(MyRVHeader.STATE_NORMAL);
             }
         }
-
-
-//        setSelection(0);// scroll to top each time
+        setSelection(0);// scroll to top each time
     }
 
     private void setSelection(int position) {
@@ -314,11 +299,13 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
         layoutManager.scrollToPositionWithOffset(position, 0);
     }
 
+    public void setViewParent(ViewParent view) {
+        mViewParent=view;
+    }
+
     //--------------------------------覆盖方法----------------------------------------------------
     @Override
     public void setAdapter(Adapter adapter) {
-//        LogUtil.d("jiacw", "setAdapter HeadView " + mHeadViewInfos.size());
-
         // make sure XListViewFooter is the last footer view, and only add once.
         if (!isFooterAdded) {//只会执行一次
             isFooterAdded = true;
@@ -330,15 +317,14 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
                 super.setAdapter(adapter);
             }
         }
-
         mAdapter = adapter;
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-//        LogUtil.d("jiacw", "onTouch HeadView " + mHeadViewInfos.size());
-
+        LogUtil.d("jiacw3", "onTouch total " + getTotalItemCount());
+        LogUtil.d("jiacw3", "onTouch last " + getLastVisiblePosition());
         if (mLastY == -1) {
             mLastY = ev.getRawY();//获取原始y坐标
         }
@@ -349,22 +335,21 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
             case MotionEvent.ACTION_MOVE:
                 float deltaY = ev.getRawY() - mLastY;
                 mLastY = ev.getRawY();
-//                LogUtil.d("jiacw", "Last " + getLastVisiblePosition());
-//                LogUtil.d("jiacw", "Total " + getTotalItemCount());
                 //第一个项目出现，头部显示或拉下
                 getTotalItemCount();
-                if (mfirstVisibleItem == 0 && (mHeaderView.getVisibleHeight() > 0
+                LogUtil.d("jiacw3", "onTouch first " + getFirstVisiblePosition());
+                if (getFirstVisiblePosition() <= 0 && (mHeaderView.getVisibleHeight() > 0
                         || deltaY > 0)) {
                     updateHeaderHeight(deltaY / OFFSET_RADIO);
                     //最后一个项目已经拉上或想拉上
-                } else if (getLastVisiblePosition() == getTotalItemCount() - 1 &&
+                } else if (getLastVisiblePosition() == getTotalItemCount() &&
                         (mFooterView.getBottomMargin() > 0 || deltaY < 0)) {
                     updateFooterHeight(-deltaY / OFFSET_RADIO);
                 }
                 break;
             default://抬起或划出
                 mLastY = -1;//reset
-                if (mfirstVisibleItem == 0) {
+                if (getFirstVisiblePosition() <= 0) {
                     //调用刷新
                     if (mHeaderView.getVisibleHeight() > mHeaderViewHeight) {
                         mPullRefreshing = true;
@@ -375,7 +360,7 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
                     }
                     resetHeaderHeight();
 
-                } else if (getLastVisiblePosition() == getTotalItemCount() - 1) {
+                } else if (getLastVisiblePosition() == getTotalItemCount()) {
                     //invoke load more
                     if (mEnablePullLoad && mFooterView.getBottomMargin() > PULL_LOAD_MORE_DELTA
                             && !mPullLoading) {
@@ -390,7 +375,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
 
     @Override
     public void computeScroll() {
-//        LogUtil.d("jiacw", "compute HeadView " + mHeadViewInfos.size());
         if (mScroller.computeScrollOffset()) {
             if (mScrollBack == SCROLLBACK_HEADER) {
                 mHeaderView.setVisibleHeight(mScroller.getCurrY());
@@ -403,14 +387,7 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
     }
 
     //--------------------------实现接口--------------------------------------
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-    }
 
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        mfirstVisibleItem = firstVisibleItem;
-    }
 
     public void setOnItemClickListener(OnRVItemClickListener listener) {
         mOnRVItemClickListener = listener;
@@ -418,4 +395,6 @@ public class MyRecyclerView extends RecyclerView implements AbsListView.OnScroll
             MyAdapter.realizeOnItemCLick(mOnRVItemClickListener);
         }
     }
+
+
 }

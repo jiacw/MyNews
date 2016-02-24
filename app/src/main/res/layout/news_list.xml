@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/nl_rl"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,11 +11,6 @@
     tools:context="com.jiacw.t03mynews.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <!--<com.jiacw.t03mynews.view.SListView-->
-    <!--android:id="@+id/sn_lv"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:cacheColorHint="#00000000"/>-->
     <com.jiacw.t03mynews.view.MyRecyclerView
         android:id="@+id/nl_rv"
         android:layout_width="match_parent"

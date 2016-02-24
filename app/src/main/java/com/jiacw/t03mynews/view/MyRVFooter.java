@@ -2,7 +2,10 @@ package com.jiacw.t03mynews.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -38,10 +41,12 @@ public class MyRVFooter extends LinearLayout {
      * function: 初始视图
      */
     private void initView(Context context) {
-        LinearLayout footView = (LinearLayout) LayoutInflater.from(context)
-                .inflate(R.layout.layout_foot, null);
+
+        RelativeLayout footView = (RelativeLayout) LayoutInflater.from(context)
+                .inflate(R.layout.layout_foot, null,false);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER_HORIZONTAL;
         addView(footView, lp);
         mRLContentView = (RelativeLayout) footView.findViewById(R.id.lf_rl_content);
         mProgressBar = (ProgressBar) footView.findViewById(R.id.lf_pb);

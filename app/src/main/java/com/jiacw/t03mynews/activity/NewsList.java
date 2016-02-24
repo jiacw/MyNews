@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.Toast;
 
 import com.jiacw.t03mynews.R;
@@ -32,6 +33,7 @@ import com.jiacw.t03mynews.model.News;
 import com.jiacw.t03mynews.model.NewsDB;
 import com.jiacw.t03mynews.util.HttpUtil;
 import com.jiacw.t03mynews.util.JsonUtil;
+import com.jiacw.t03mynews.util.LogUtil;
 import com.jiacw.t03mynews.view.MyRecyclerView;
 
 import java.net.MalformedURLException;
@@ -67,25 +69,25 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//重设
         //fab
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.ab_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "hi", Snackbar.LENGTH_SHORT)
-                        .setAction("hi", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.ab_fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Snackbar.make(v, "hi", Snackbar.LENGTH_SHORT)
+//                        .setAction("hi", null).show();
+//            }
+//        });
         //标题栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.nl_tb);
         setSupportActionBar(toolbar);
         //表格视图
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.ab_cl_tl);
-//        tabLayout.addTab(tabLayout.newTab().setText("头条"));
-//        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
-//        tabLayout.addTab(tabLayout.newTab().setText("体育"));
-//        tabLayout.addTab(tabLayout.newTab().setText("科技"));
-//        tabLayout.addTab(tabLayout.newTab().setText("军事"));
-//        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.ab_cl_tl);
+        tabLayout.addTab(tabLayout.newTab().setText("头条"));
+        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
+        tabLayout.addTab(tabLayout.newTab().setText("体育"));
+        tabLayout.addTab(tabLayout.newTab().setText("科技"));
+        tabLayout.addTab(tabLayout.newTab().setText("军事"));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         //抽屉
         mDrawer = (DrawerLayout) findViewById(R.id.am_dl);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar
@@ -142,10 +144,11 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         topViewPager.setAdapter(topViewAdapter);
         mRecyclerView = (MyRecyclerView) findViewById(R.id.nl_rv);
         mRecyclerView.setPullLoadEnabled(true);
-//        mRecyclerView.addHeaderView(headViewPage);
+        mRecyclerView.addHeaderView(headViewPage);
         mRecyclerView.setXListViewListener(this);
         mRecyclerView.setOnItemClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setViewParent(mRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mHandler = new Handler();
         requestNews();
     }
@@ -205,6 +208,8 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         subList.addAll(newsList.subList(0, 20));
         mAdapter = new MyAdapter(this, subList);
         mRecyclerView.setAdapter(mAdapter);
+        LogUtil.d("jiacw", "showNews " + mRecyclerView.mHeadViewInfos.size());
+        mRecyclerView.mHeadViewInfos.size();
         isNewest();
     }
 

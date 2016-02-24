@@ -2,12 +2,17 @@ package com.jiacw.t03mynews.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jiacw.t03mynews.R;
@@ -22,7 +27,7 @@ public class MyRVHeader extends LinearLayout {
     public static final int STATE_NORMAL = 0;
     public static final int STATE_REFESHING = 2;
     public static final int STATE_READY = 1;
-    private LinearLayout mHeadLayout;
+    private RelativeLayout mHeadLayout;
     private ImageView mIVArrow;
     private TextView mTVHint;
     private ProgressBar mProgressBar;
@@ -30,6 +35,7 @@ public class MyRVHeader extends LinearLayout {
     private RotateAnimation mRotateDownAnim;
     private int mVisiableHeight;
     private int mLastState = STATE_NORMAL;
+    private ViewParent mViewParent;
 
     //构造方法
     public MyRVHeader(Context context) {
@@ -50,7 +56,7 @@ public class MyRVHeader extends LinearLayout {
         //初始，设置头视图高度为0
         LinearLayout.LayoutParams lp = new LinearLayout
                 .LayoutParams(LayoutParams.MATCH_PARENT, 0);
-        mHeadLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.layout_head, null);
+        mHeadLayout = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.layout_head, null, false);
         //添加子视图
         addView(mHeadLayout, lp);
         //寻找控件
@@ -71,6 +77,7 @@ public class MyRVHeader extends LinearLayout {
 
     /**
      * 获取可见高度
+     *
      * @return 头部视图高度
      */
     public int getVisibleHeight() {
@@ -79,6 +86,7 @@ public class MyRVHeader extends LinearLayout {
 
     /**
      * 设置可见高度
+     *
      * @param height 高度
      */
     public void setVisibleHeight(int height) {
@@ -92,6 +100,7 @@ public class MyRVHeader extends LinearLayout {
 
     /**
      * 设置动画和提示文字
+     *
      * @param state 状态
      */
     public void setLastState(int state) {
@@ -127,4 +136,6 @@ public class MyRVHeader extends LinearLayout {
         }
         mLastState = state;
     }
+
+
 }

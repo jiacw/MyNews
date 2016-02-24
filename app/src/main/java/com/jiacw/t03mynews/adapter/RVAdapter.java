@@ -24,7 +24,6 @@ public class RVAdapter extends RecyclerView.Adapter {
     ArrayList<View> mFooterViewInfos;
     static final ArrayList<View> EMPTY_INFO_LIST = new ArrayList<>();
     int firstHeadSize;
-
     //------------------------------构造函数-----------------------------------------------------
 
 
@@ -50,8 +49,8 @@ public class RVAdapter extends RecyclerView.Adapter {
         switch (viewType) {
             case TYPE_HEAD:
                 View view = mHeaderViewInfos.get(0);
-//                LogUtil.d("jiacw", "TYPE_HEAD ");
                 mHeaderViewInfos.remove(0);
+                LogUtil.d("jiacw","onCreateView");
                 return new VHHead(view);
             case TYPE_ITEM:
                 return mAdapter.onCreateViewHolder(parent, viewType);
@@ -64,7 +63,6 @@ public class RVAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        LogUtil.d("jiacw", "onBindViewHolder->mAdapter " + mAdapter + " " + i++);
         if (isHeader(position)) {
 //            LogUtil.d("jiacw", "onBind Head " + position);
             return;

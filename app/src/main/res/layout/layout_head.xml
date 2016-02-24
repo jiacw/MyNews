@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="bottom"
-              android:orientation="vertical"><!--内容位于底部-->
-    <!--主要内容布局-->
-    <RelativeLayout
-        android:id="@+id/lh_RL_content"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"><!--高度确定-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
 
-        <!--文字部分-->
-        <LinearLayout
-            android:id="@+id/lh_LL_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:orientation="vertical">
-            <!--刷新提示-->
-            <TextView
-                android:id="@+id/lh_tvHint"
-                android:layout_width="wrap_content"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:text="@string/lh_tvHint"/>
-            <!--更新时间-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"><!--内容位于底部-->
+        <!--主要内容布局-->
+        <RelativeLayout
+            android:id="@+id/lh_RL_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"><!--高度确定-->
+
+            <!--文字部分-->
             <LinearLayout
+                android:id="@+id/lh_LL_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp">
-
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+                <!--刷新提示-->
                 <TextView
+                    android:id="@+id/lh_tvHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lh_updateTime"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/lh_tvUpdateTime"
+                    android:gravity="center"
+                    android:text="@string/lh_tvHint"/>
+                <!--更新时间-->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"/>
+                    android:layout_marginTop="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lh_updateTime"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/lh_tvUpdateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <!--箭头和进度条-->
-        <ImageView
-            android:id="@+id/lh_ivArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/lh_LL_text"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="-35dp"
-            android:src="@drawable/arrow"/>
-        <ProgressBar
-            android:layout_width="30dp"
-            android:id="@+id/lh_pb"
-            android:layout_alignLeft="@+id/lh_LL_text"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="-40dp"
-            android:visibility="invisible"
-            android:layout_height="30dp"/>
-    </RelativeLayout>
+            <!--箭头和进度条-->
+            <ImageView
+                android:id="@+id/lh_ivArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lh_LL_text"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-35dp"
+                android:src="@drawable/arrow"/>
 
-</LinearLayout>
+            <ProgressBar
+                android:id="@+id/lh_pb"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/lh_LL_text"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-40dp"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

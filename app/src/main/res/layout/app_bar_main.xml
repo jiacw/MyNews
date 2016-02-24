@@ -19,35 +19,35 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="#ffffff"
             tools:ignore="UnusedAttribute"/>
-        <!--app:layout_scrollFlags="scroll|enterAlways"-->
 
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/ab_cl_tl"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--app:tabIndicatorColor="#ffffff"-->
-            <!--app:tabSelectedTextColor="#ffffff"-->
-            <!--app:tabTextColor="#dcdcdc"/>-->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ab_cl_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="#ffffff"
+            app:tabSelectedTextColor="#ffffff"
+            app:tabTextColor="#dcdcdc"/>
     </android.support.design.widget.AppBarLayout>
 
 
     <include layout="@layout/news_list"/>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ab_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:elevation="10dp"
-        android:src="@android:drawable/ic_dialog_email"
-        app:borderWidth="5dp"
-        app:fabSize="normal"
-        app:pressedTranslationZ="10dp"
-        app:rippleColor="@color/colorPrimary"
-        tools:ignore="UnusedAttribute"/>
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/ab_fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:elevation="10dp"-->
+        <!--android:src="@android:drawable/ic_dialog_email"-->
+        <!--app:borderWidth="5dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:pressedTranslationZ="10dp"-->
+        <!--app:rippleColor="@color/colorPrimary"-->
+        <!--tools:ignore="UnusedAttribute"/>-->
 </android.support.design.widget.CoordinatorLayout>
