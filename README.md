@@ -1,2 +1,5 @@
 # MyNews
-支线 目前进行RecyclerView的替换，需要替换相关方法，并且尽可能的使用MD设计；
+支线 
+用RecyclerView替换ListView，取消下拉加载，改用swipeRefreshLayout；
+完成自定义进度条，标题栏图标待添加；
+测试CollapsingToolbarLayout折叠Layout；
