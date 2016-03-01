@@ -11,10 +11,16 @@
     tools:context="com.jiacw.t03mynews.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <com.jiacw.t03mynews.view.MyRecyclerView
-        android:id="@+id/nl_rv"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/nl_srl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:layout_height="wrap_content">
+
+        <com.jiacw.t03mynews.view.MyRecyclerView
+            android:id="@+id/nl_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

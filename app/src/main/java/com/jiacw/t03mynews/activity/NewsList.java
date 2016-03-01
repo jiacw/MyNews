@@ -2,6 +2,7 @@ package com.jiacw.t03mynews.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -12,6 +13,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.Toast;
 
 import com.jiacw.t03mynews.R;
@@ -56,6 +57,7 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
     private int i = 0;//索引
     private int j = 20;
     private int totalSize;
+    private SwipeRefreshLayout swipeRefreshLayout;
     //抽屉
     DrawerLayout mDrawer;
     //新闻操作类
@@ -69,25 +71,24 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//重设
         //fab
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.ab_fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Snackbar.make(v, "hi", Snackbar.LENGTH_SHORT)
-//                        .setAction("hi", null).show();
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.ab_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "CLICK ME?", Snackbar.LENGTH_SHORT)
+                        .setAction("YES!", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(NewsList.this, CollapseActivity.class));
+                            }
+                        }).show();
+            }
+        });
         //标题栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.nl_tb);
         setSupportActionBar(toolbar);
         //表格视图
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.ab_cl_tl);
-        tabLayout.addTab(tabLayout.newTab().setText("头条"));
-        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
-        tabLayout.addTab(tabLayout.newTab().setText("体育"));
-        tabLayout.addTab(tabLayout.newTab().setText("科技"));
-        tabLayout.addTab(tabLayout.newTab().setText("军事"));
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        initTabLayout();
         //抽屉
         mDrawer = (DrawerLayout) findViewById(R.id.am_dl);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar
@@ -98,8 +99,18 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         navigationView.setNavigationItemSelectedListener(this);
         getImage();
         initialize();
-
+        //刷新控件
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.nl_srl);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRecyclerView.onRefresh();
+            }
+        });
+        swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN);
+        swipeRefreshLayout.setDistanceToTriggerSync(400);
     }
+
 
     @Override
     protected void onDestroy() {
@@ -134,6 +145,34 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
     }
 
     /**
+     * tab相关初始化
+     */
+    private void initTabLayout() {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.ab_cl_tl);
+        tabLayout.addTab(tabLayout.newTab().setText("头条"));
+        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
+        tabLayout.addTab(tabLayout.newTab().setText("体育"));
+        tabLayout.addTab(tabLayout.newTab().setText("科技"));
+        tabLayout.addTab(tabLayout.newTab().setText("军事"));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Toast.makeText(NewsList.this, tab.getText() + "", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    /**
      * 寻找控件，实例化类
      */
     private void initialize() {
@@ -148,7 +187,7 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         mRecyclerView.setXListViewListener(this);
         mRecyclerView.setOnItemClickListener(this);
         mRecyclerView.setViewParent(mRecyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mHandler = new Handler();
         requestNews();
     }
@@ -198,7 +237,6 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
         }
     }
 
-
     /**
      * 获取新闻列表，为listView适配数据
      */
@@ -241,7 +279,6 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
      */
     private void finishRefresh() {
         mRecyclerView.stopRefresh();
-        mRecyclerView.setRefreshTime();
     }
 
     /**
@@ -259,13 +296,7 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
     }
 
     //--------------------------------接口-------------------------------------------------------
-    //    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent(this, NewsWeb.class);
-//        News news = (News) parent.getAdapter().getItem(position);
-//        intent.putExtra("url", news.getArticle_url());
-//        startActivity(intent);
-//    }
+
     @Override
     public void onItemClick(View view, News news) {
         Intent intent = new Intent(this, NewsWeb.class);
@@ -282,6 +313,7 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
                     requestNews();
                 }
                 finishRefresh();
+                swipeRefreshLayout.setRefreshing(false);
             }
         }, 2000);
     }
