@@ -3,19 +3,16 @@ package com.jiacw.t03mynews.view;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jiacw.t03mynews.R;
-import com.jiacw.t03mynews.util.LogUtil;
 
 /**
  * Created by Jiacw on 14:32 28/2/2016.
@@ -44,7 +41,7 @@ public class MyWebView extends WebView {
     private void initView() {
         progressBar = new ProgressBar(mContext,null,android.R.attr.progressBarStyleHorizontal);
         progressBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 10, 0, 0));//设置位置
-        progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_diy));
+        progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_diy));
         addView(progressBar);
         doSetting();
         setWebChromeClient(new MyWebChromeClient());

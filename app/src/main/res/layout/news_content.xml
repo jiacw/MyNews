@@ -10,6 +10,8 @@
         android:id="@+id/nc_tb"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="#ffffff"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         android:background="?attr/colorPrimary"
         app:layout_collapseMode="pin"/>
     <com.jiacw.t03mynews.view.MyWebView

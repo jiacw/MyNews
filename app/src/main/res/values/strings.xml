@@ -9,7 +9,7 @@
     <string name="in_test_num">00</string>
     <string name="in_separator">|</string>
     <string name="in_bury_text">踩</string>
-    <string name="in_repin_text">收藏</string>
+    <string name="favourite_sc">收藏</string>
     <string name="lh_tvHint">下拉刷新</string>
     <string name="lh_updateTime">上次更新时间:</string>
     <string name="lf_tvHint">查看更多</string>
@@ -25,6 +25,5 @@
     <string name="item_below">Communicate</string>
     <string name="nav_about">关于</string>
     <string name="nav_feedback">反馈</string>
-    <string name="nav_favourite">收藏</string>
     <string name="action_share">分享</string>
 </resources>

@@ -176,7 +176,7 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
      * 寻找控件，实例化类
      */
     private void initialize() {
-        mNewsDB = NewsDB.getInstance(this);
+        mNewsDB = NewsDB.getInstance(this,false);
         View headViewPage = LayoutInflater.from(this).inflate(R.layout.news_viewpage, null);
         ViewPager topViewPager = (ViewPager) headViewPage.findViewById(R.id.nv_vp);
         VPAdapter topViewAdapter = new VPAdapter(this, mImageList);
