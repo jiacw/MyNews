@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.jiacw.t03mynews.database.NewsSQLite;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class NewsDB {
     private Cursor mCursor;
 
     private NewsDB(Context context) {
-        NewsSQLite newsOH = new NewsSQLite(context, NEWDB, 4);
+        NewsSQLite newsOH = new NewsSQLite(context, NEWDB, 5);
         mSQLite = newsOH.getWritableDatabase();
     }
 
@@ -81,7 +82,8 @@ public class NewsDB {
 
     /**
      * 收藏新闻
-     * @param url 新闻链接
+     *
+     * @param url  新闻链接
      * @param like 喜欢或不喜欢
      */
     public void updateFavor(String url, boolean like) {
@@ -89,25 +91,28 @@ public class NewsDB {
         if (like) sign = 1;
         ContentValues contentValues = new ContentValues();
         contentValues.put("favourite", sign);
+        contentValues.put("collectTime",System.currentTimeMillis()/1000);
         mSQLite.update("News", contentValues, "article_url=?", new String[]{url});
         contentValues.clear();
     }
 
     /**
      * 查询是否已收藏
+     *
      * @param url 新闻链接
      * @return true 收藏了；false 没收藏
      */
-    public boolean queryFavor(String url){
-        Cursor cursor= mSQLite.query("News", new String[]{"favourite"}, "article_url=?"
-                , new String[]{url}, null, null, null);
+    public boolean queryFavor(String url) {
+        Cursor cursor = mSQLite.query("News", new String[]{"favourite"}, "article_url=?"
+                , new String[]{url}, null, null, "collectTime desc");
         int sign = 0;
-        if (cursor.moveToFirst()){
-             sign= cursor.getInt(cursor.getColumnIndex("favourite"));
+        if (cursor.moveToFirst()) {
+            sign = cursor.getInt(cursor.getColumnIndex("favourite"));
         }
         cursor.close();
         return sign == 1;
     }
+
     /**
      * created at 17/1/2016 8:47
      * function: 关闭数据库和游标
@@ -124,5 +129,23 @@ public class NewsDB {
         }
     }
 
-
+    /**
+     * 查找所有已收藏新闻
+     * @return 返回收藏新闻
+     */
+    public List<News> findAllFavor() {
+        List<News> newses = new ArrayList<>();
+        Cursor cursor = mSQLite.query("News", new String[]{"title", "article_url"}
+                , "favourite=?", new String[]{1 + ""}, null, null, "collectTime desc");
+        if (cursor.moveToFirst()) {
+            do {
+                News news = new News();
+                news.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+                news.setArticle_url(cursor.getString(cursor.getColumnIndex("article_url")));
+                newses.add(news);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return newses;
+    }
 }

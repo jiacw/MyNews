@@ -37,6 +37,8 @@ public class NewsSQLite extends SQLiteOpenHelper {
         switch (oldVersion) {
             case 3:
                 db.execSQL("alter table News add column favourite integer");
+            case 4:
+                db.execSQL("alter table News add column collectTime text");
                 break;
         }
     }

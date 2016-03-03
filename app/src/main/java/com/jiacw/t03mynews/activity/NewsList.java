@@ -339,7 +339,8 @@ public class NewsList extends AppCompatActivity implements OnRVItemClickListener
                 break;
             case R.id.nav_about:
                 break;
-            case R.id.nav_test:
+            case R.id.nav_favor:
+                startActivity(new Intent(this,FavorActivity.class));
                 break;
         }
         mDrawer.closeDrawer(GravityCompat.START);
