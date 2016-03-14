@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="textSize">
+        <item>小</item>
+        <item>中</item>
+        <item>大</item>
+    </string-array>
+    <string-array name="size">
+        <item>t01</item>
+        <item>t02</item>
+        <item>t03</item>
+    </string-array>
+</resources>
